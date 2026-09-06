@@ -39,25 +39,30 @@ Constraints:
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 7.8 MB  
-**Submitted:** 2026-09-06T18:13:44.458Z  
+**Runtime:** 349 ms (beats 5.84%)  
+**Memory:** 131.4 MB (beats 5.11%)  
+**Submitted:** 2026-09-06T18:13:50.879Z  
 
 ```cpp
-            }
-                left++;
-                st.erase(s[left]);
-            while(st.find(s[right]) != st.end() ){
-        for (int right = 0; right<s.length(); right++){
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        set<char>st ;
+        int left =0;
+        int result = 0;
 
-        int result = 0;
-        int left =0;
-        set<char>st ;
-    int lengthOfLongestSubstring(string s) {
-            st.insert(s[right]);
-            result = max(result,right - left + 1);
-        }
-
+        for (int right = 0; right<s.length(); right++){
+            while(st.find(s[right]) != st.end() ){
+                st.erase(s[left]);
+                left++;
+            }
+            st.insert(s[right]);
+            result = max(result,right - left + 1);
+        }
+        return result ;
+        
+    }
+};
 ```
 
 ---
