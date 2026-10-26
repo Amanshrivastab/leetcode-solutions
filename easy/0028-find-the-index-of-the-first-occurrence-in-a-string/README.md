@@ -38,18 +38,18 @@ Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
 **Language:** C++  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 9.1 MB (beats 74.45%)  
-**Submitted:** 2026-09-29T18:10:48.491Z  
+**Memory:** 9.1 MB (beats 44.62%)  
+**Submitted:** 2026-10-26T18:15:00.333Z  
 
 ```cpp
+
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        int n = haystack.length();
-        int m = needle.length();
+        int n = haystack.size();
+        int m = needle.size();
 
         for (int i = 0; i <= n - m; i++) {
-
             int j = 0;
 
             while (j < m && haystack[i + j] == needle[j]) {
@@ -64,6 +64,7 @@ public:
         return -1;
     }
 };
+
 ```
 
 ---
