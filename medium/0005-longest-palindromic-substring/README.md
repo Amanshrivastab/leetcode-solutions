@@ -4,71 +4,81 @@
 
 ## Problem
 
-Given a string s, return the longest palindromic substring in s.
+Given a string `s`, return *the longest* *palindromic* *substring* in `s`.
 
  
-Example 1:
 
+**Example 1:**
+
+```
 Input: s = "babad"
 Output: "bab"
 Explanation: "aba" is also a valid answer.
 
+```
 
-Example 2:
+**Example 2:**
 
+```
 Input: s = "cbbd"
 Output: "bb"
 
+```
 
  
-Constraints:
 
+**Constraints:**
 
-	1 <= s.length <= 1000
-	s consist of only digits and English letters.
+- 1 <= s.length <= 1000
+- s consist of only digits and English letters.
 
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 7.8 MB  
-**Submitted:** 2026-09-09T18:29:16.576Z  
+**Runtime:** 10 ms (beats 55.43%)  
+**Memory:** 9.2 MB (beats 87.70%)  
+**Submitted:** 2026-11-04T18:26:19.154Z  
 
 ```cpp
 class Solution {
 public:
-
-    int expand(string &s, int left, int right) {
-
-        while (left >= 0 &&
-               right < s.length() &&
-               s[left] == s[right]) {
-
-            left--;
-            right++;
-        }
-
-        return right - left - 1;
-    }
-
     string longestPalindrome(string s) {
 
         int start = 0;
         int maxLen = 1;
 
-        for (int i = 0; i < s.length(); i++) {
+        for(int i = 0; i < s.size(); i++) {
 
-            // Odd length: "aba"
-            int len1 = expand(s, i, i);
+            // Odd length palindrome
+            int left = i;
+            int right = i;
 
-            // Even length: "bb"
-            int len2 = expand(s, i, i + 1);
+            while(left >= 0 && right < s.size() &&
+                  s[left] == s[right]) {
 
-            int len = max(len1, len2);
+                if(right - left + 1 > maxLen) {
+                    start = left;
+                    maxLen = right - left + 1;
+                }
 
-            if (len > maxLen) {
-                maxLen = len;
-                start = i - (len - 1) / 2;
+                left--;
+                right++;
+            }
+
+            // Even length palindrome
+            left = i;
+            right = i + 1;
+
+            while(left >= 0 && right < s.size() &&
+                  s[left] == s[right]) {
+
+                if(right - left + 1 > maxLen) {
+                    start = left;
+                    maxLen = right - left + 1;
+                }
+
+                left--;
+                right++;
             }
         }
 
